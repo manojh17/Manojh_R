@@ -408,7 +408,6 @@ html {
 
 
         html,body {
-            width: 100vw;  /* <-- this often causes extra scroll */
 
   margin: 0 auto;
   padding: 0;
