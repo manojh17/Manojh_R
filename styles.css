@@ -391,6 +391,7 @@
   body {
     background:radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgb(0, 0, 0) 35%, rgb(110, 0, 161) 100%);
         color: white;
+        width: 100%;
         
    
   }
