@@ -85,7 +85,6 @@ html {
 
 
     .hero,.about{
-        width: ;
         display: flex;
         justify-content: space-around;
         margin: 0 50px;
@@ -424,7 +423,6 @@ h1{
 }
 
 h3{
-  width: 
   text-wrap: nowrap;
 
 }
@@ -436,9 +434,9 @@ h3{
 
 /* home and abt card */
     .home,.about{
-        justify-content: space-around;
+        
         margin: 0 10px;
-        padding: 20px;
+        padding: 10px;
         padding-top: 10px;
         border: #ffffff 1px solid;
         border-radius: 26px;
@@ -460,12 +458,16 @@ h3{
     .contact-section>ul>li>a{
       color: #ffffff;
       text-decoration: none;
+      font-size: x-small;
     }
+
+
     .heartbeat{
-      width: 50px;
+      width: 35px;
         display: inline-block;
     transform-origin: center;
     will-change: transform;
+    
     }
     .heartbeat:hover {
     animation: beat 0.9s ease-in-out 1 forwards;
