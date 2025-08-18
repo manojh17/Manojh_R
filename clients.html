@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Client Data • Manojh R</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="brand" href="index.html">MR.</a>
+      <ul class="menu">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container section">
+    <h2 class="section-title">Client Submissions</h2>
+    <div id="clientsList" class="grid"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Manojh R</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const clients = JSON.parse(localStorage.getItem("clients")) || [];
+    const list = document.getElementById("clientsList");
+
+    if (clients.length === 0) {
+      list.innerHTML = "<p class='muted'>No submissions yet.</p>";
+    } else {
+      clients.forEach(c => {
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <h3>${c.name}</h3>
+          <p><b>Email:</b> ${c.email}</p>
+          <p><b>Message:</b> ${c.message}</p>
+          <p class="muted tiny">${c.time}</p>
+        `;
+        list.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
