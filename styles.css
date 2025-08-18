@@ -3,12 +3,12 @@
 html,body{margin:0;padding:0; color: white;}
 
 body{
-  padding:25px;
+  padding: 0 25px;
 }
 :root{
   --bg: #0b0f17;
   --panel:#121826;
-  --muted:#97a3b6;
+  --muted:  #ffffff;
   --text:#e6ebf2;
   --brand:#ff6600;
   --card:#0f1422;
@@ -17,10 +17,10 @@ body{
 :root.light{
   --bg:#ffffff;
   --panel:#f5f7fb;
-  --muted:#475569;
+  --muted:#000000;
   --text:#0f172a;
   --card:#ffffff;
-  --ring:#d2d9e7;
+  --ring:#000000;
 }
 body{
   background: radial-gradient(1200px 600px at 10% 10%, #361f3c, var(--bg));
@@ -79,7 +79,7 @@ h1{font-size:clamp(2rem, 4vw + .5rem, 3.25rem);line-height:1.1;margin:.25rem 0 1
 .avatar{position:relative;width:220px;height:220px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#0f1527,#0a1020)}
 .avatar img{width:68%;filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}
 .avatar .ring{position:absolute;inset:-10px;border-radius:50%;border:2px dashed var(--ring);animation:spin 18s linear infinite}
-.orbit{position:absolute;inset:auto 0 -14px 0;display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;opacity:.9}
+.orbit{position:absolute;inset:auto 0 -14px 0;display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;opacity:.9; }
 @keyframes spin{to{transform:rotate(1turn)}}
 
 @media (max-width: 920px){
@@ -105,6 +105,7 @@ h1{font-size:clamp(2rem, 4vw + .5rem, 3.25rem);line-height:1.1;margin:.25rem 0 1
 @media (max-width: 560px){
   .skills-grid{grid-template-columns:1fr}
   .projects-grid{grid-template-columns:1fr}
+  .orbit{display:none}
 }
 
 .card{
