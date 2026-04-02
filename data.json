@@ -1,0 +1,166 @@
+{
+    "profile": {
+        "name": "Manojh R",
+        "tagline": "Full‑Stack • AI/ML • IoT",
+        "bio": "I build modern, responsive web applications that blend clean UI, robust backends, and smart AI features. I’m a B.Tech (IT) graduate (May 2025) with hands‑on projects in Flask/Node, React, Python, and IoT using Arduino & ESP32.",
+        "aboutText1": "I’m a passionate <strong>Full‑Stack Web Developer</strong> and <strong>AI/ML integrator</strong> who loves shipping end‑to‑end products—frontend to backend to deployment. I’ve explored <strong>IoT</strong> with Arduino and ESP32, built <strong>AI chatbots</strong>, and designed <strong>responsive, scalable</strong> web apps.",
+        "aboutText2": "My interests span <strong>Flask & Node/Express</strong>, <strong>React</strong>, <strong>Python</strong>, <strong>computer vision</strong>, and <strong>cloud deployments</strong> (Render/Vercel/PythonAnywhere). Outside of code, I run a YouTube channel (<em>AnimeXGaming</em>) for anime & gaming.",
+        "degree": "Degree: <b>B.Tech – Information Technology</b> (May 2025)",
+        "focus": "Focus: <b>AgriGPT</b> (multilingual, voice-enabled), <b>IoT pest detection</b>, <b>e‑commerce</b>, <b>EMI tools</b>",
+        "strengths": "Strengths: Clean UI, problem‑solving, quick learning, clear communication",
+        "github": "https://github.com/manojh17",
+        "linkedin": "https://www.linkedin.com/in/manojh17/",
+        "email": "manojh1702@gmail.com",
+        "whatsapp": "919597562259",
+        "resume": "./assets/ManojhrResume.pdf"
+    },
+    "projects": [
+        {
+            "_id": "p1",
+            "title": "AgriGPT – Agriculture Chatbot",
+            "description": "Multilingual (Tamil/English) voice & text chatbot using Flask + Gemini API with local-first fallback, user profiles, and admin dashboard.",
+            "image": "./assets/p1.png",
+            "liveLink": "#",
+            "sourceLink": "#"
+        },
+        {
+            "_id": "p2",
+            "title": "Trust User Recommendation System",
+            "description": "ML pipeline for trust prediction among users, with Flask API and interactive UI for insights and recommendations.",
+            "image": "./assets/p2.png",
+            "liveLink": "https://trust-prediction-among-users-on.onrender.com",
+            "sourceLink": "#"
+        },
+        {
+            "_id": "p3",
+            "title": "GTEC IT Department Website",
+            "description": "A professional, responsive website for the Information Technology department at GTEC. Includes department overview, faculty profiles, labs, events, achievements, and contact details.",
+            "image": "./assets/p3.png",
+            "liveLink": "#",
+            "sourceLink": "#"
+        },
+        {
+            "_id": "p4",
+            "title": "EMI Calculator (React)",
+            "description": "Clean UX with charts and downloadable amortization reports.",
+            "image": "./assets/p4.png",
+            "liveLink": "https://emi-calci.vercel.app/",
+            "sourceLink": "#"
+        },
+        {
+            "_id": "p5",
+            "title": "Engineering Notes Bot",
+            "description": "The Student Community Notes Bot is a Telegram-based automation system developed to help engineering students easily access subject notes and connect with peers across colleges.\nIt provides 1500+ categorized study materials, allowing students to instantly find notes by simply entering a subject name or code (e.g., CY3151, EVS, Maths).\n\nBeyond just sharing resources, the bot promotes student collaboration and networking through a dedicated community group, where learners can share insights, clarify doubts, and support each other’s academic growth.\n\nThis project is non-commercial and created purely to support students, with all materials sourced from open educational resources and public internet references.",
+            "image": "https://www.google.com/imgres?q=engineering%20notes%20images%20logo&imgurl=https%3A%2F%2Fimg.freepik.com%2Fpremium-vector%2Fengineering-simple-logo-gear-logo_393879-1426.jpg%3Fsemt%3Dais_incoming%26w%3D740%26q%3D80&imgrefurl=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fengineering-logo-png&docid=iH5DCRfY7LMxHM&tbnid=wcDfJwKD80LuJM&vet=12ahUKEwiGyIuN9s6TAxUTzDgGHVw4FqQQnPAOegQIJhAB..i&w=740&h=740&hcb=2&ved=2ahUKEwiGyIuN9s6TAxUTzDgGHVw4FqQQnPAOegQIJhAB",
+            "liveLink": "https://t.me/anna_university_notesbot",
+            "sourceLink": ""
+        }
+    ],
+    "skills": [
+        {
+            "category": " Programing Languages",
+            "tags": [
+                "C",
+                "Python",
+                "Java (Foundational)",
+                "JavaScript (Foundational)"
+            ],
+            "_id": "s1",
+            "createdAt": "2026-04-02T17:33:14.484766",
+            "updatedAt": "2026-04-02T17:33:14.484766"
+        },
+        {
+            "category": "Frontend",
+            "tags": [
+                "HTML",
+                "CSS",
+                "Js"
+            ],
+            "_id": "s2",
+            "createdAt": "2026-04-02T17:33:42.636600",
+            "updatedAt": "2026-04-02T17:33:42.636600"
+        },
+        {
+            "category": "Backend",
+            "tags": [
+                "Flask",
+                "Node & Express",
+                "REST APIs",
+                "Auth"
+            ],
+            "_id": "s3",
+            "createdAt": "2026-04-02T17:33:51.314850",
+            "updatedAt": "2026-04-02T17:33:51.314850"
+        },
+        {
+            "category": "Ai Tools",
+            "tags": [
+                "GenAI (Gemini)",
+                "OpenAI APIs",
+                "Ollama",
+                "Antigravity",
+                "Claude"
+            ],
+            "_id": "s4",
+            "createdAt": "2026-04-02T17:34:38.308739",
+            "updatedAt": "2026-04-02T17:34:38.308739"
+        },
+        {
+            "category": "Tools",
+            "tags": [
+                "Git & GitHub",
+                "Render",
+                "Vercel"
+            ],
+            "_id": "s6",
+            "createdAt": "2026-04-02T17:35:10.695858",
+            "updatedAt": "2026-04-02T17:35:10.695858"
+        },
+        {
+            "category": "IoT Basics",
+            "tags": [
+                "ESP32-CAM",
+                "Arduino",
+                "Serial/Cloud bridges",
+                "Automation"
+            ],
+            "_id": "807644ae-5149-4a37-b5c1-d117387b09f3",
+            "createdAt": "2026-04-02T17:36:03.673493"
+        },
+        {
+            "category": "Data Science",
+            "tags": [
+                "Basic Statastics",
+                "Data Analyzation",
+                "Data Preprocessing",
+                "Feature Engineering",
+                "Model Selection",
+                "Machine Learning"
+            ],
+            "_id": "89a0454e-6704-4846-b458-cfd2a24a49bb",
+            "createdAt": "2026-04-02T17:38:16.047342"
+        },
+        {
+            "category": "Data Handling Tools",
+            "tags": [
+                "Numpy",
+                "Pandas",
+                "Matplotlib",
+                "Seaborn"
+            ],
+            "_id": "58a70c50-c04c-49d9-b2a2-e3993a0db670",
+            "createdAt": "2026-04-02T17:39:18.530559"
+        }
+    ],
+    "experiences": [
+        {
+            "_id": "e1",
+            "role": "Web Development Intern",
+            "company": "Joy Innovations Pvt. Ltd. (Vellore)",
+            "duration": "Jul 2024 – Aug 2024",
+            "description": "Started My first step on career on Web development @joy innovations , Where i learned About webdevelopmnt and some Industrial stuffs."
+        }
+    ],
+    "certificates": [],
+    "messages": []
+}
