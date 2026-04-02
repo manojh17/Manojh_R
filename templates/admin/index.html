@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin/styles.css') }}">
 </head>
 <body>
 
@@ -178,7 +178,7 @@
             </div>
             <div class="form-group full">
               <label>Resume URL</label>
-              <input type="text" id="prof-resume" placeholder="./assets/ManojhrResume.pdf">
+              <input type="text" id="prof-resume" placeholder="/static/assets/ManojhrResume.pdf">
             </div>
           </div>
 
@@ -201,7 +201,7 @@
             </div>
             <div class="form-group full">
               <label>Image URL</label>
-              <input type="text" id="proj-image" placeholder="./assets/p1.png or https://...">
+              <input type="text" id="proj-image" placeholder="/static/assets/p1.png or https://...">
             </div>
             <div class="form-group">
               <label>Live Link</label>
@@ -338,6 +338,6 @@
     </main>
   </div>
 
-  <script src="script.js"></script>
+  <script src="{{ url_for('static', filename='admin/script.js') }}"></script>
 </body>
 </html>

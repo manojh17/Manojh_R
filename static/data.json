@@ -12,14 +12,14 @@
         "linkedin": "https://www.linkedin.com/in/manojh17/",
         "email": "manojh1702@gmail.com",
         "whatsapp": "919597562259",
-        "resume": "/static/assets/ManojhrResume.pdf"
+        "resume": "./assets/ManojhrResume.pdf"
     },
     "projects": [
         {
             "_id": "p1",
             "title": "AgriGPT – Agriculture Chatbot",
             "description": "Multilingual (Tamil/English) voice & text chatbot using Flask + Gemini API with local-first fallback, user profiles, and admin dashboard.",
-            "image": "/static/assets/p1.png",
+            "image": "./assets/p1.png",
             "liveLink": "#",
             "sourceLink": "#"
         },
@@ -27,7 +27,7 @@
             "_id": "p2",
             "title": "Trust User Recommendation System",
             "description": "ML pipeline for trust prediction among users, with Flask API and interactive UI for insights and recommendations.",
-            "image": "/static/assets/p2.png",
+            "image": "./assets/p2.png",
             "liveLink": "https://trust-prediction-among-users-on.onrender.com",
             "sourceLink": "#"
         },
@@ -35,7 +35,7 @@
             "_id": "p3",
             "title": "GTEC IT Department Website",
             "description": "A professional, responsive website for the Information Technology department at GTEC. Includes department overview, faculty profiles, labs, events, achievements, and contact details.",
-            "image": "/static/assets/p3.png",
+            "image": "./assets/p3.png",
             "liveLink": "#",
             "sourceLink": "#"
         },
@@ -43,7 +43,7 @@
             "_id": "p4",
             "title": "EMI Calculator (React)",
             "description": "Clean UX with charts and downloadable amortization reports.",
-            "image": "/static/assets/p4.png",
+            "image": "./assets/p4.png",
             "liveLink": "https://emi-calci.vercel.app/",
             "sourceLink": "#"
         },

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 
 <body>
@@ -26,7 +26,7 @@
       <ul id="menu" class="menu" style=" z-index: 100000;">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="./projects.html">Projects</a></li>
+        <li><a href="/projects">Projects</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#certificates">Certificates</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -37,10 +37,10 @@
     <section class="hero container">
       <div class="hero-copy">
         <p class="eyebrow" id="dyn-tagline">Full‑Stack • AI/ML • IoT</p>
-        <h1>Hi, I’m <span class="accent" id="dyn-name">Manojh R</span></h1>
+        <h1>Hi, I'm <span class="accent" id="dyn-name">Manojh R</span></h1>
         <p class="lead" id="dyn-bio">
           I build modern, responsive web applications that blend clean UI, robust backends,
-          and smart AI features. I’m a B.Tech (IT) graduate (May 2025) with hands‑on projects in
+          and smart AI features. I'm a B.Tech (IT) graduate (May 2025) with hands‑on projects in
           Flask/Node, React, Python, and IoT using Arduino & ESP32.
         </p>
         <div class="cta-row">
@@ -49,25 +49,20 @@
         </div>
         <ul class="quick-links">
           <li><a target="_blank" rel="noopener" id="dyn-github" href="https://github.com/manojh17">GitHub ↗</a></li>
-          <li><a target="_blank" rel="noopener" id="dyn-linkedin" href="https://www.linkedin.com/in/manojh17/">LinkedIn
-              ↗</a></li>
-          <li><a target="_blank" rel="noopener" id="dyn-email"
-              href="mailto:manojh1702@gmail.com?subject=Hello%20Manojh">Email ↗</a></li>
-          <li><a target="_blank" rel="noopener" id="dyn-whatsapp"
-              href="https://wa.me/919597562259?text=Hello%20Manojh">WhatsApp ↗</a></li>
-          <li><a target="_blank" rel="noopener" id="dyn-resume" href="./assets/ManojhrResume.pdf">Resume ↗</a></li>
+          <li><a target="_blank" rel="noopener" id="dyn-linkedin" href="https://www.linkedin.com/in/manojh17/">LinkedIn ↗</a></li>
+          <li><a target="_blank" rel="noopener" id="dyn-email" href="mailto:manojh1702@gmail.com?subject=Hello%20Manojh">Email ↗</a></li>
+          <li><a target="_blank" rel="noopener" id="dyn-whatsapp" href="https://wa.me/919597562259?text=Hello%20Manojh">WhatsApp ↗</a></li>
+          <li><a target="_blank" rel="noopener" id="dyn-resume" href="{{ url_for('static', filename='assets/ManojhrResume.pdf') }}">Resume ↗</a></li>
         </ul>
       </div>
       <div class="hero-art" aria-hidden="true">
         <div class="avatar" style="margin-top:-75PX;">
           <div class="avatar" id="avatar">
             <div class="ring"></div>
-            <img src="./assets/dp.JPG" alt="Avatar"
+            <img src="{{ url_for('static', filename='assets/dp.JPG') }}" alt="Avatar"
               style="border-radius: 50%; object-fit: cover; width: 200px; height: 200px; border: 5px solid white; cursor:pointer;"
-              onclick="window.location='./admin/me.html'" />
+              onclick="window.location='/admin/'" />
           </div>
-
-
         </div>
         <div class="orbit">
           <span>AI</span><span>Web</span><span>IoT</span><span>ML</span>
@@ -80,10 +75,9 @@
     <section id="about" class="section container">
       <h2 class="section-title">About</h2>
       <p id="dyn-aboutText1">
-        I’m a passionate <strong>Full‑Stack Web Developer</strong> and <strong>AI/ML integrator</strong> who loves
-        shipping end‑to‑end products—frontend to backend to deployment. I’ve explored <strong>IoT</strong> with Arduino
-        and ESP32,
-        built <strong>AI chatbots</strong>, and designed <strong>responsive, scalable</strong> web apps.
+        I'm a passionate <strong>Full‑Stack Web Developer</strong> and <strong>AI/ML integrator</strong> who loves
+        shipping end‑to‑end products—frontend to backend to deployment. I've explored <strong>IoT</strong> with Arduino
+        and ESP32, built <strong>AI chatbots</strong>, and designed <strong>responsive, scalable</strong> web apps.
       </p>
       <p id="dyn-aboutText2">
         My interests span <strong>Flask & Node/Express</strong>, <strong>React</strong>, <strong>Python</strong>,
@@ -108,7 +102,6 @@
 
     <section id="projects" class="section container">
       <h2 class="section-title">Featured Projects</h2>
-
       <div class="grid projects-grid" id="projects-container">
         <!-- Dynamic projects will be inserted here -->
       </div>
@@ -144,8 +137,7 @@
           <textarea id="message" name="message" rows="5" placeholder="How can I help?" required></textarea>
         </div>
         <button class="btn primary" type="submit">Send</button>
-        <p class="muted tiny">Or email me at <a id="dyn-contact-email"
-            href="mailto:manojh1702@gmail.com">manojh1702@gmail.com</a>.</p>
+        <p class="muted tiny">Or email me at <a id="dyn-contact-email" href="mailto:manojh1702@gmail.com">manojh1702@gmail.com</a>.</p>
       </form>
     </section>
   </main>
@@ -157,7 +149,7 @@
     </div>
   </footer>
 
-  <script src="./script.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 
 </html>

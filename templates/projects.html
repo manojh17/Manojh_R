@@ -4,19 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projects • Manojh R</title>
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 
 <body>
   <header class="site-header">
     <nav class="nav">
-      <a class="brand" href="index.html">MR.</a>
+      <a class="brand" href="/">MR.</a>
       <ul class="menu">
-        <li><a href="index.html#about">About</a></li>
-        <li><a href="projects.html" class="active">Projects</a></li>
-        <li><a href="index.html#skills">Skills</a></li>
-        <li><a href="index.html#experience">Experience</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/projects" class="active">Projects</a></li>
+        <li><a href="/#skills">Skills</a></li>
+        <li><a href="/#experience">Experience</a></li>
+        <li><a href="/#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -24,7 +24,7 @@
   <main id="main">
     <section class="section container">
       <h2 class="section-title">Projects</h2>
-      <p class="muted">Major works I’ve built & deployed.</p>
+      <p class="muted">Major works I've built & deployed.</p>
 
       <div class="grid projects-grid" id="projects-container">
         <!-- Projects will be loaded dynamically here -->
@@ -34,11 +34,11 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© <span id="year"></span> Manojh R • Projects</p>
+      <p>© Manojh R <span id="year"></span></p>
       <a class="to-top" href="#main" aria-label="Back to top">↑</a>
     </div>
   </footer>
 
-  <script src="./script.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

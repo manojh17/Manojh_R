@@ -53,15 +53,21 @@
       if (!res.ok) throw new Error('Failed to fetch portfolio data');
       const data = await res.json();
 
-      // Helper to extract actual image URL if someone pastes a Google Image search link
+      // Helper: fix image URLs
+      // 1. Converts Google Image search links → direct image URL
+      // 2. Converts old ./assets/ relative paths → /static/assets/
       const getValidImageUrl = (url) => {
-        if (url && url.includes('google.com/imgres')) {
+        if (!url) return '';
+        if (url.includes('google.com/imgres')) {
           try {
             const urlObj = new URL(url);
             const imgurl = urlObj.searchParams.get('imgurl');
             if (imgurl) return imgurl;
           } catch (e) {}
         }
+        // Convert legacy relative asset paths to Flask static path
+        if (url.startsWith('./assets/')) return url.replace('./assets/', '/static/assets/');
+        if (url.startsWith('assets/'))   return '/static/' + url;
         return url;
       };
 
