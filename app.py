@@ -1,14 +1,16 @@
 import os
 import json
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from functools import wraps
-from flask import Flask, request, jsonify, render_template, redirect, url_for
+from flask import Flask, request, jsonify, render_template, redirect, url_for, send_from_directory, Response, make_response
 from flask_cors import CORS
 import jwt
 from dotenv import load_dotenv
 
 load_dotenv()
+
+SITE_URL = os.getenv('SITE_URL', 'https://manojh.online')
 
 app = Flask(__name__)  # Flask will automatically use templates/ and static/ folders
 CORS(app)
@@ -60,6 +62,59 @@ def token_required(f):
             return jsonify({'message': 'Token is not valid'}), 401
         return f(*args, **kwargs)
     return decorated
+
+# ─────────────────────────────────────────
+# SEO HEADERS (after every response)
+# ─────────────────────────────────────────
+@app.after_request
+def add_seo_headers(response):
+    # Security headers (Google uses HTTPS/security as ranking signal)
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    # Cache static assets aggressively for performance (Core Web Vitals)
+    if request.path.startswith('/static/'):
+        response.headers['Cache-Control'] = 'public, max-age=31536000, immutable'
+    return response
+
+# ─────────────────────────────────────────
+# ROBOTS.TXT & SITEMAP.XML
+# ─────────────────────────────────────────
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory(app.static_folder, 'robots.txt')
+
+@app.route('/sitemap.xml')
+def sitemap():
+    """Dynamically generate sitemap.xml so Google always gets fresh URLs."""
+    data = load_data()
+    now = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+
+    # Static pages
+    static_pages = [
+        {'url': f'{SITE_URL}/', 'priority': '1.0', 'changefreq': 'weekly'},
+        {'url': f'{SITE_URL}/projects', 'priority': '0.9', 'changefreq': 'weekly'},
+    ]
+
+    xml_parts = ['<?xml version="1.0" encoding="UTF-8"?>']
+    xml_parts.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+
+    for page in static_pages:
+        xml_parts.append(f'''
+  <url>
+    <loc>{page["url"]}</loc>
+    <lastmod>{now}</lastmod>
+    <changefreq>{page["changefreq"]}</changefreq>
+    <priority>{page["priority"]}</priority>
+  </url>''')
+
+    xml_parts.append('\n</urlset>')
+    xml_content = ''.join(xml_parts)
+
+    response = make_response(xml_content)
+    response.headers['Content-Type'] = 'application/xml; charset=utf-8'
+    response.headers['Cache-Control'] = 'public, max-age=86400'  # Cache 1 day
+    return response
 
 # ─────────────────────────────────────────
 # PAGE ROUTES (render Jinja2 templates)

@@ -3,7 +3,37 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Projects • Manojh R</title>
+
+  <!-- ═══ Primary SEO ═══ -->
+  <title>Projects | Manojh R – Full-Stack & AI/ML Developer</title>
+  <meta name="description" content="Browse all projects by Manojh R: AgriGPT chatbot, Trust Prediction ML system, EMI Calculator, GTEC IT department site, and more. Flask, React, Python & IoT builds." />
+  <meta name="keywords" content="Manojh R projects, AgriGPT, Trust Prediction, EMI Calculator, Flask projects, Python ML projects, IoT projects, Full-Stack portfolio" />
+  <meta name="author" content="Manojh R" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://manojh.online/projects" />
+
+  <!-- ═══ Open Graph ═══ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://manojh.online/projects" />
+  <meta property="og:title" content="Projects | Manojh R – Full-Stack & AI/ML Developer" />
+  <meta property="og:description" content="Browse all projects by Manojh R: AgriGPT chatbot, Trust Prediction ML system, EMI Calculator and more." />
+  <meta property="og:image" content="https://manojh.online/static/assets/dp.JPG" />
+  <meta property="og:site_name" content="Manojh R Portfolio" />
+
+  <!-- ═══ Twitter Card ═══ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Projects | Manojh R – Full-Stack & AI/ML Developer" />
+  <meta name="twitter:description" content="Browse all projects by Manojh R: AgriGPT, trust ML, EMI Calculator and more." />
+  <meta name="twitter:image" content="https://manojh.online/static/assets/dp.JPG" />
+
+  <!-- ═══ PWA / App Meta ═══ -->
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}" />
+  <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='assets/dp.JPG') }}" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 
@@ -23,8 +53,8 @@
 
   <main id="main">
     <section class="section container">
-      <h2 class="section-title">Projects</h2>
-      <p class="muted">Major works I've built & deployed.</p>
+      <h1 class="section-title">Projects by Manojh R</h1>
+      <p class="muted">Major web, AI/ML, and IoT works I've built &amp; deployed.</p>
 
       <div class="grid projects-grid" id="projects-container">
         <!-- Projects will be loaded dynamically here -->

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /projects
+Disallow: /admin/
+Disallow: /api/
+Disallow: /static/admin/
+
+Sitemap: https://manojh.online/sitemap.xml

@@ -4,11 +4,92 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Manojh R • Portfolio</title>
-  <meta name="description" content="Full‑Stack Web Developer • AI/ML Integrator • IoT Innovator" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <!-- ═══ Primary SEO ═══ -->
+  <title>Manojh R | Full-Stack Developer & AI/ML Engineer – manojh.online</title>
+  <meta name="description" content="Manojh R is a Full-Stack Web Developer and AI/ML engineer from India. Expert in Flask, Node.js, React, Python, IoT (Arduino/ESP32). Explore projects like AgriGPT and available for freelance or full-time roles." />
+  <meta name="keywords" content="Manojh R, Full-Stack Developer, AI ML Engineer, Flask Developer, React Developer, Python Developer, IoT Developer, Web Developer India, Portfolio, AgriGPT, manojh.online" />
+  <meta name="author" content="Manojh R" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href="https://manojh.online/" />
+
+  <!-- ═══ Open Graph (Facebook, LinkedIn, WhatsApp previews) ═══ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://manojh.online/" />
+  <meta property="og:title" content="Manojh R | Full-Stack Developer & AI/ML Engineer" />
+  <meta property="og:description" content="B.Tech IT graduate building modern web apps with Flask, React, Node.js, and AI integrations. Check out AgriGPT, IoT projects and more." />
+  <meta property="og:image" content="https://manojh.online/static/assets/dp.JPG" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="800" />
+  <meta property="og:image:alt" content="Manojh R – Full-Stack Developer" />
+  <meta property="og:site_name" content="Manojh R Portfolio" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- ═══ Twitter / X Card ═══ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://manojh.online/" />
+  <meta name="twitter:title" content="Manojh R | Full-Stack Developer & AI/ML Engineer" />
+  <meta name="twitter:description" content="B.Tech IT graduate building modern web apps with Flask, React, Node.js, and AI integrations. Available for freelance projects." />
+  <meta name="twitter:image" content="https://manojh.online/static/assets/dp.JPG" />
+  <meta name="twitter:creator" content="@manojh17" />
+
+  <!-- ═══ Geo / Contact ═══ -->
+  <meta name="geo.region" content="IN-TN" />
+  <meta name="geo.placename" content="Tamil Nadu, India" />
+
+  <!-- ═══ PWA / App Meta ═══ -->
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}" />
+  <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='assets/dp.JPG') }}" />
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='assets/dp.JPG') }}" />
+
+  <!-- ═══ JSON-LD Structured Data (Google Rich Results) ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Manojh R",
+    "url": "https://manojh.online",
+    "image": "https://manojh.online/static/assets/dp.JPG",
+    "email": "manojh1702@gmail.com",
+    "jobTitle": "Full-Stack Web Developer & AI/ML Engineer",
+    "description": "B.Tech Information Technology graduate (2025) specializing in Flask, Node.js, React, Python, and IoT development.",
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "GTEC – Govt. College of Technology"
+    },
+    "knowsAbout": ["Flask", "Node.js", "React", "Python", "Machine Learning", "IoT", "Arduino", "ESP32", "AI Chatbots"],
+    "sameAs": [
+      "https://github.com/manojh17",
+      "https://www.linkedin.com/in/manojh17/"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "IN"
+    }
+  }
+  </script>
+
+  <!-- ═══ WebSite Schema (enables Google Sitelinks Search) ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Manojh R Portfolio",
+    "url": "https://manojh.online",
+    "description": "Portfolio of Manojh R – Full-Stack Developer and AI/ML Engineer",
+    "author": {
+      "@type": "Person",
+      "name": "Manojh R"
+    }
+  }
+  </script>
+
+  <!-- ═══ Performance ═══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 
