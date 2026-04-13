@@ -3,10 +3,13 @@ import json
 import uuid
 from datetime import datetime, timezone
 from functools import wraps
+
 from flask import Flask, request, jsonify, render_template, redirect, url_for, send_from_directory, Response, make_response
 from flask_cors import CORS
 import jwt
 from dotenv import load_dotenv
+from pymongo import MongoClient
+from pymongo.errors import ConnectionFailure
 
 load_dotenv()
 
@@ -16,39 +19,111 @@ app = Flask(__name__)  # Flask will automatically use templates/ and static/ fol
 CORS(app)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'supersecretflaskkey_change_me')
 
-# --- DATA STORAGE ---
+# ─────────────────────────────────────────
+# MONGODB CONNECTION
+# ─────────────────────────────────────────
+MONGO_URI = os.getenv('MONGO_URI', '')
+
+if not MONGO_URI or '<password>' in MONGO_URI:
+    raise RuntimeError(
+        "\n\n❌  MONGO_URI is not set or still contains the placeholder.\n"
+        "    Please update .env with your real MongoDB Atlas connection string.\n"
+        "    Example: MONGO_URI=mongodb+srv://user:pass@cluster0.xxxxx.mongodb.net/manojh_portfolio\n"
+    )
+
+client = MongoClient(MONGO_URI)
+db = client.get_default_database()   # uses the DB name in the URI
+
+# Collection handles
+col_profile      = db['profile']
+col_projects     = db['projects']
+col_skills       = db['skills']
+col_experiences  = db['experiences']
+col_certificates = db['certificates']
+col_messages     = db['messages']
+col_admin        = db['admin_credentials']
+
+# Map collection name → handle (for generic CRUD routes)
+COLLECTIONS = {
+    'projects':     col_projects,
+    'skills':       col_skills,
+    'experiences':  col_experiences,
+    'certificates': col_certificates,
+}
+
+# ─────────────────────────────────────────
+# HELPERS
+# ─────────────────────────────────────────
+def _clean(doc):
+    """Remove MongoDB internal _id (ObjectId) and return plain dict."""
+    if doc is None:
+        return None
+    doc.pop('_id', None)  # drop ObjectId; we use our own string 'id' field
+    return doc
+
+def _clean_list(docs):
+    return [_clean(d) for d in docs]
+
+
+# ─────────────────────────────────────────
+# ONE-TIME DATA SEEDER  (runs on startup)
+# Seeds data.json → MongoDB if collections are empty.
+# ─────────────────────────────────────────
 DATA_FILE = 'data.json'
 
-def load_data():
+def _seed_from_json():
     if not os.path.exists(DATA_FILE):
-        return {
-            "profile": {},
-            "projects": [],
-            "skills": [],
-            "experiences": [],
-            "certificates": [],
-            "messages": []
-        }
+        return
+
+    print("🌱  Checking if seed from data.json is needed …")
     with open(DATA_FILE, 'r', encoding='utf-8') as f:
-        return json.load(f)
+        data = json.load(f)
 
-def save_data(data):
-    with open(DATA_FILE, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=4, ensure_ascii=False)
+    seeded = False
 
-# Initialize / migrate data file
-if not os.path.exists(DATA_FILE):
-    save_data(load_data())
-else:
-    d = load_data()
-    changed = False
-    if 'certificates' not in d:
-        d['certificates'] = []
-        changed = True
-    if changed:
-        save_data(d)
+    # Profile (stored as a single document with field 'singleton': True)
+    if col_profile.count_documents({}) == 0 and data.get('profile'):
+        profile = dict(data['profile'])
+        profile['singleton'] = True
+        col_profile.insert_one(profile)
+        print("   ✅  profile seeded")
+        seeded = True
 
-# --- AUTH MIDDLEWARE ---
+    # Collections
+    for key, col in COLLECTIONS.items():
+        if col.count_documents({}) == 0 and data.get(key):
+            col.insert_many([dict(item) for item in data[key]])
+            print(f"   ✅  {key} seeded ({len(data[key])} docs)")
+            seeded = True
+
+    # Messages
+    if col_messages.count_documents({}) == 0 and data.get('messages'):
+        col_messages.insert_many([dict(m) for m in data['messages']])
+        print(f"   ✅  messages seeded ({len(data['messages'])} docs)")
+        seeded = True
+
+    # Admin credentials
+    if col_admin.count_documents({}) == 0:
+        stored = data.get('admin_credentials', {})
+        col_admin.insert_one({
+            'singleton': True,
+            'username': stored.get('username', os.getenv('ADMIN_USERNAME', 'admin')),
+            'password': stored.get('password', os.getenv('ADMIN_PASSWORD', 'admin')),
+        })
+        print("   ✅  admin_credentials seeded")
+        seeded = True
+
+    if seeded:
+        print("🌱  Seed complete. You can safely delete data.json if desired.\n")
+    else:
+        print("🌱  MongoDB already has data — skipping seed.\n")
+
+_seed_from_json()
+
+
+# ─────────────────────────────────────────
+# AUTH MIDDLEWARE
+# ─────────────────────────────────────────
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -58,24 +133,24 @@ def token_required(f):
         try:
             token = token.split(' ')[1] if ' ' in token else token
             jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-        except:
+        except Exception:
             return jsonify({'message': 'Token is not valid'}), 401
         return f(*args, **kwargs)
     return decorated
 
+
 # ─────────────────────────────────────────
-# SEO HEADERS (after every response)
+# SEO HEADERS
 # ─────────────────────────────────────────
 @app.after_request
 def add_seo_headers(response):
-    # Security headers (Google uses HTTPS/security as ranking signal)
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['X-Frame-Options'] = 'SAMEORIGIN'
     response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
-    # Cache static assets aggressively for performance (Core Web Vitals)
     if request.path.startswith('/static/'):
         response.headers['Cache-Control'] = 'public, max-age=31536000, immutable'
     return response
+
 
 # ─────────────────────────────────────────
 # ROBOTS.TXT & SITEMAP.XML
@@ -84,21 +159,16 @@ def add_seo_headers(response):
 def robots():
     return send_from_directory(app.static_folder, 'robots.txt')
 
+
 @app.route('/sitemap.xml')
 def sitemap():
-    """Dynamically generate sitemap.xml so Google always gets fresh URLs."""
-    data = load_data()
     now = datetime.now(timezone.utc).strftime('%Y-%m-%d')
-
-    # Static pages
     static_pages = [
         {'url': f'{SITE_URL}/', 'priority': '1.0', 'changefreq': 'weekly'},
         {'url': f'{SITE_URL}/projects', 'priority': '0.9', 'changefreq': 'weekly'},
     ]
-
     xml_parts = ['<?xml version="1.0" encoding="UTF-8"?>']
     xml_parts.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
-
     for page in static_pages:
         xml_parts.append(f'''
   <url>
@@ -107,60 +177,65 @@ def sitemap():
     <changefreq>{page["changefreq"]}</changefreq>
     <priority>{page["priority"]}</priority>
   </url>''')
-
     xml_parts.append('\n</urlset>')
-    xml_content = ''.join(xml_parts)
-
-    response = make_response(xml_content)
+    response = make_response(''.join(xml_parts))
     response.headers['Content-Type'] = 'application/xml; charset=utf-8'
-    response.headers['Cache-Control'] = 'public, max-age=86400'  # Cache 1 day
+    response.headers['Cache-Control'] = 'public, max-age=86400'
     return response
 
+
 # ─────────────────────────────────────────
-# PAGE ROUTES (render Jinja2 templates)
+# PAGE ROUTES
 # ─────────────────────────────────────────
 @app.route('/')
 def index():
     return render_template('index.html')
 
+
 @app.route('/projects')
 def projects():
     return render_template('projects.html')
 
+
 @app.route('/admin/')
-@app.route('/admin/me.html')   # backwards-compat with old onclick link
+@app.route('/admin/me.html')
 def admin():
     return render_template('admin/index.html')
+
 
 # ─────────────────────────────────────────
 # PUBLIC API ROUTES
 # ─────────────────────────────────────────
 @app.route('/api/portfolio', methods=['GET'])
 def get_portfolio():
-    data = load_data()
+    profile = _clean(col_profile.find_one({'singleton': True}))
+    if profile:
+        profile.pop('singleton', None)
+
     return jsonify({
-        "profile":      data.get("profile", {}),
-        "projects":     data.get("projects", []),
-        "skills":       data.get("skills", []),
-        "experiences":  data.get("experiences", []),
-        "certificates": data.get("certificates", [])
+        "profile":      profile or {},
+        "projects":     _clean_list(col_projects.find()),
+        "skills":       _clean_list(col_skills.find()),
+        "experiences":  _clean_list(col_experiences.find()),
+        "certificates": _clean_list(col_certificates.find()),
     })
+
 
 @app.route('/api/contact', methods=['POST'])
 def submit_contact():
     req_data = request.json
     if not req_data or not req_data.get('name') or not req_data.get('email') or not req_data.get('message'):
         return jsonify({'message': 'Please enter all fields'}), 400
-    data = load_data()
-    data.setdefault('messages', []).append({
-        "_id":       str(uuid.uuid4()),
+
+    col_messages.insert_one({
+        "id":        str(uuid.uuid4()),
         "name":      req_data['name'],
         "email":     req_data['email'],
         "message":   req_data['message'],
-        "createdAt": datetime.utcnow().isoformat()
+        "createdAt": datetime.utcnow().isoformat(),
     })
-    save_data(data)
     return jsonify({'message': 'Message sent successfully!'})
+
 
 # ─────────────────────────────────────────
 # ADMIN AUTH
@@ -171,16 +246,15 @@ def admin_login():
     username = req_data.get('username')
     password = req_data.get('password')
 
-    # Check data.json-stored credentials first (set via change-password), fall back to .env
-    data = load_data()
-    stored = data.get('admin_credentials', {})
-    valid_user = stored.get('username', os.getenv('ADMIN_USERNAME', 'admin'))
-    valid_pass = stored.get('password', os.getenv('ADMIN_PASSWORD', 'admin'))
+    creds = col_admin.find_one({'singleton': True})
+    valid_user = creds.get('username', os.getenv('ADMIN_USERNAME', 'admin')) if creds else os.getenv('ADMIN_USERNAME', 'admin')
+    valid_pass = creds.get('password', os.getenv('ADMIN_PASSWORD', 'admin')) if creds else os.getenv('ADMIN_PASSWORD', 'admin')
 
     if username == valid_user and password == valid_pass:
         token = jwt.encode({'user': username}, app.config['SECRET_KEY'], algorithm="HS256")
         return jsonify({'token': token})
     return jsonify({'message': 'Invalid Credentials'}), 400
+
 
 @app.route('/api/admin/change-password', methods=['PUT'])
 @token_required
@@ -190,10 +264,14 @@ def change_password():
     new_password = req_data.get('password')
     if not new_username or not new_password:
         return jsonify({'message': 'Username and password required'}), 400
-    data = load_data()
-    data['admin_credentials'] = {'username': new_username, 'password': new_password}
-    save_data(data)
+
+    col_admin.update_one(
+        {'singleton': True},
+        {'$set': {'username': new_username, 'password': new_password}},
+        upsert=True
+    )
     return jsonify({'message': 'Credentials updated successfully'})
+
 
 # ─────────────────────────────────────────
 # ADMIN DATA API (protected)
@@ -201,92 +279,121 @@ def change_password():
 @app.route('/api/admin/data', methods=['GET'])
 @token_required
 def get_admin_data():
-    data = load_data()
+    profile = _clean(col_profile.find_one({'singleton': True}))
+    if profile:
+        profile.pop('singleton', None)
+
+    messages = _clean_list(col_messages.find())
+    # normalise: old messages used '_id' string field; new ones use 'id'
+    for m in messages:
+        if 'id' not in m and '_id' in m:
+            m['id'] = m.pop('_id')
+
     return jsonify({
-        "profile":      data.get("profile", {}),
-        "projects":     data.get("projects", []),
-        "skills":       data.get("skills", []),
-        "experiences":  data.get("experiences", []),
-        "certificates": data.get("certificates", []),
-        "messages":     data.get("messages", [])
+        "profile":      profile or {},
+        "projects":     _clean_list(col_projects.find()),
+        "skills":       _clean_list(col_skills.find()),
+        "experiences":  _clean_list(col_experiences.find()),
+        "certificates": _clean_list(col_certificates.find()),
+        "messages":     messages,
     })
+
 
 @app.route('/api/messages', methods=['GET'])
 @token_required
 def get_messages():
-    return jsonify(load_data().get('messages', []))
+    messages = _clean_list(col_messages.find())
+    for m in messages:
+        if 'id' not in m and '_id' in m:
+            m['id'] = m.pop('_id')
+    return jsonify(messages)
+
 
 @app.route('/api/messages/<msg_id>', methods=['DELETE'])
 @token_required
 def delete_message(msg_id):
-    data = load_data()
-    messages = data.get('messages', [])
-    updated = [m for m in messages if m.get('_id') != msg_id]
-    if len(messages) == len(updated):
+    # Support both old '_id' string field and new 'id' field
+    result = col_messages.delete_one({'$or': [{'id': msg_id}, {'_id': msg_id}]})
+    if result.deleted_count == 0:
         return jsonify({'message': 'Message not found'}), 404
-    data['messages'] = updated
-    save_data(data)
     return jsonify({'message': 'Message deleted'})
+
 
 @app.route('/api/profile', methods=['PUT'])
 @token_required
 def update_profile():
     req_data = request.json
-    data = load_data()
-    data.setdefault('profile', {}).update(req_data)
-    save_data(data)
-    return jsonify(data['profile'])
+    req_data.pop('_id', None)
+    req_data.pop('singleton', None)
+
+    col_profile.update_one(
+        {'singleton': True},
+        {'$set': req_data},
+        upsert=True
+    )
+    profile = _clean(col_profile.find_one({'singleton': True}))
+    profile.pop('singleton', None)
+    return jsonify(profile)
+
 
 # ─────────────────────────────────────────
 # GENERIC COLLECTION CRUD (protected)
 # ─────────────────────────────────────────
 VALID_COLLECTIONS = ['projects', 'skills', 'experiences', 'certificates']
 
+
 @app.route('/api/<collection>', methods=['POST'])
 @token_required
 def add_item(collection):
     if collection not in VALID_COLLECTIONS:
         return jsonify({'message': 'Invalid collection'}), 400
+
     req_data = request.json
-    req_data['_id']       = str(uuid.uuid4())
+    string_id             = str(uuid.uuid4())
+    req_data['_id']       = string_id
     req_data['createdAt'] = datetime.utcnow().isoformat()
-    data = load_data()
-    data.setdefault(collection, []).append(req_data)
-    save_data(data)
-    return jsonify(req_data), 201
+
+    # pymongo will overwrite req_data['_id'] with ObjectId after insert_one,
+    # so we query back using the string ID we stored in the document.
+    COLLECTIONS[collection].insert_one(req_data)
+    doc = _clean(COLLECTIONS[collection].find_one({'_id': string_id})) or {}
+    doc.setdefault('_id', string_id)
+    return jsonify(doc), 201
+
 
 @app.route('/api/<collection>/<item_id>', methods=['PUT'])
 @token_required
 def update_item(collection, item_id):
     if collection not in VALID_COLLECTIONS:
         return jsonify({'message': 'Invalid collection'}), 400
+
     req_data = request.json
-    data  = load_data()
-    items = data.get(collection, [])
-    for i, item in enumerate(items):
-        if item.get('_id') == item_id:
-            req_data['_id']       = item_id
-            req_data['createdAt'] = item.get('createdAt', datetime.utcnow().isoformat())
-            req_data['updatedAt'] = datetime.utcnow().isoformat()
-            items[i]              = req_data
-            data[collection]      = items
-            save_data(data)
-            return jsonify(req_data)
-    return jsonify({'message': 'Item not found'}), 404
+    req_data.pop('_id', None)
+
+    col = COLLECTIONS[collection]
+    existing = col.find_one({'_id': item_id})
+    if not existing:
+        return jsonify({'message': 'Item not found'}), 404
+
+    req_data['_id']       = item_id
+    req_data['createdAt'] = existing.get('createdAt', datetime.utcnow().isoformat())
+    req_data['updatedAt'] = datetime.utcnow().isoformat()
+
+    col.replace_one({'_id': item_id}, req_data)
+    return jsonify(_clean(col.find_one({'_id': item_id})))
+
 
 @app.route('/api/<collection>/<item_id>', methods=['DELETE'])
 @token_required
 def delete_item(collection, item_id):
     if collection not in VALID_COLLECTIONS:
         return jsonify({'message': 'Invalid collection'}), 400
-    data    = load_data()
-    items   = data.get(collection, [])
-    updated = [item for item in items if item.get('_id') != item_id]
-    if len(items) == len(updated):
+
+    result = COLLECTIONS[collection].delete_one({'_id': item_id})
+    if result.deleted_count == 0:
         return jsonify({'message': 'Item not found'}), 404
-    data[collection] = updated
-    save_data(data)
     return jsonify({'message': f'{collection[:-1].capitalize()} removed'})
+
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
