@@ -1,64 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- ═══ Primary SEO ═══ -->
-  <title>Manojh R | Full-Stack Developer & AI/ML Engineer – manojh.online</title>
-  <meta name="description" content="Manojh R is a Full-Stack Web Developer and AI/ML engineer from India. Expert in Flask, Node.js, React, Python, IoT (Arduino/ESP32). Explore projects like AgriGPT and available for freelance or full-time roles." />
-  <meta name="keywords" content="Manojh R, Full-Stack Developer, AI ML Engineer, Flask Developer, React Developer, Python Developer, IoT Developer, Web Developer India, Portfolio, AgriGPT, manojh.online" />
+  <title>Manojh R | Full-Stack Developer &amp; AI/ML Engineer – manojh.online</title>
+  <meta name="description" content="Manojh R is a Full-Stack Web Developer and AI/ML Engineer from Tamil Nadu, India. Expert in Flask, React, Node.js, Python, Machine Learning, Computer Vision, and IoT (Arduino/ESP32). B.Tech IT graduate (2025). Explore projects like AgriGPT chatbot, Trust Prediction System, EMI Calculator. Open for freelance and full-time roles." />
+  <meta name="keywords" content="Manojh R, manojh.online, Manojh portfolio, Full-Stack Developer India, AI ML Engineer India, Flask Developer, React Developer, Python Developer, Node.js developer, IoT Developer, Web Developer Tamil Nadu, Web Developer Vellore, AgriGPT, multilingual chatbot, Gemini API, agriculture chatbot, Trust Prediction ML, EMI Calculator React, GTEC website, Engineering Notes Bot, Telegram bot, B.Tech IT 2025, Full Stack Web Developer, Machine Learning projects, Computer Vision, ESP32, Arduino, deep learning, data science, cloud deployment, Render, Vercel, PythonAnywhere, REST API, MongoDB, Flask REST API, responsive web design, progressive web app, hire developer India, freelance developer India, junior developer India, software developer Tamil Nadu, full stack portfolio, portfolio website, manojh1702, manojh17" />
   <meta name="author" content="Manojh R" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="revisit-after" content="7 days" />
+  <meta name="rating" content="general" />
+  <meta name="language" content="English" />
+  <meta name="category" content="Technology, Portfolio, Web Development, AI, Machine Learning" />
+  <meta name="classification" content="Portfolio" />
+  <meta name="coverage" content="Worldwide" />
+  <meta name="distribution" content="Global" />
+  <meta name="target" content="all" />
   <link rel="canonical" href="https://manojh.online/" />
 
   <!-- ═══ Open Graph (Facebook, LinkedIn, WhatsApp previews) ═══ -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://manojh.online/" />
-  <meta property="og:title" content="Manojh R | Full-Stack Developer & AI/ML Engineer" />
-  <meta property="og:description" content="B.Tech IT graduate building modern web apps with Flask, React, Node.js, and AI integrations. Check out AgriGPT, IoT projects and more." />
+  <meta property="og:title" content="Manojh R | Full-Stack Developer &amp; AI/ML Engineer" />
+  <meta property="og:description" content="B.Tech IT graduate (2025) building modern web apps with Flask, React, Node.js, Python, and AI integrations. Explore AgriGPT, Machine Learning, IoT projects and more. Available for freelance &amp; full-time roles." />
   <meta property="og:image" content="https://manojh.online/static/assets/dp.JPG" />
   <meta property="og:image:width" content="800" />
   <meta property="og:image:height" content="800" />
-  <meta property="og:image:alt" content="Manojh R – Full-Stack Developer" />
+  <meta property="og:image:alt" content="Manojh R – Full-Stack Developer and AI/ML Engineer from Tamil Nadu, India" />
+  <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:site_name" content="Manojh R Portfolio" />
   <meta property="og:locale" content="en_IN" />
+  <meta property="og:locale:alternate" content="en_US" />
 
   <!-- ═══ Twitter / X Card ═══ -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@manojh17" />
   <meta name="twitter:url" content="https://manojh.online/" />
-  <meta name="twitter:title" content="Manojh R | Full-Stack Developer & AI/ML Engineer" />
-  <meta name="twitter:description" content="B.Tech IT graduate building modern web apps with Flask, React, Node.js, and AI integrations. Available for freelance projects." />
+  <meta name="twitter:title" content="Manojh R | Full-Stack Developer &amp; AI/ML Engineer" />
+  <meta name="twitter:description" content="B.Tech IT graduate building modern web apps with Flask, React, Node.js, Python, and AI integrations. Available for freelance projects from Tamil Nadu, India." />
   <meta name="twitter:image" content="https://manojh.online/static/assets/dp.JPG" />
+  <meta name="twitter:image:alt" content="Manojh R – Full-Stack Developer and AI/ML Engineer" />
   <meta name="twitter:creator" content="@manojh17" />
 
   <!-- ═══ Geo / Contact ═══ -->
   <meta name="geo.region" content="IN-TN" />
   <meta name="geo.placename" content="Tamil Nadu, India" />
+  <meta name="geo.position" content="11.1271;78.6569" />
+  <meta name="ICBM" content="11.1271, 78.6569" />
 
   <!-- ═══ PWA / App Meta ═══ -->
   <meta name="theme-color" content="#0f172a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Manojh R" />
+  <meta name="application-name" content="Manojh R Portfolio" />
   <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}" />
   <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='assets/dp.JPG') }}" />
   <link rel="apple-touch-icon" href="{{ url_for('static', filename='assets/dp.JPG') }}" />
 
-  <!-- ═══ JSON-LD Structured Data (Google Rich Results) ═══ -->
+  <!-- ═══ JSON-LD: Person Schema (Google Rich Results) ═══ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "https://manojh.online/#person",
     "name": "Manojh R",
+    "givenName": "Manojh",
+    "familyName": "R",
     "url": "https://manojh.online",
-    "image": "https://manojh.online/static/assets/dp.JPG",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://manojh.online/static/assets/dp.JPG",
+      "width": 800,
+      "height": 800
+    },
     "email": "manojh1702@gmail.com",
+    "telephone": "+919597562259",
     "jobTitle": "Full-Stack Web Developer & AI/ML Engineer",
-    "description": "B.Tech Information Technology graduate (2025) specializing in Flask, Node.js, React, Python, and IoT development.",
+    "description": "B.Tech Information Technology graduate (2025) from Tamil Nadu, India. Specializing in Flask, Node.js, React, Python, Machine Learning, Computer Vision, and IoT development. Open for freelance and full-time opportunities.",
     "alumniOf": {
       "@type": "CollegeOrUniversity",
-      "name": "GTEC – Govt. College of Technology"
+      "name": "GTEC – Govt. College of Technology",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "Tamil Nadu",
+        "addressCountry": "IN"
+      }
     },
-    "knowsAbout": ["Flask", "Node.js", "React", "Python", "Machine Learning", "IoT", "Arduino", "ESP32", "AI Chatbots"],
+    "hasCredential": {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "Bachelor's Degree",
+      "name": "B.Tech – Information Technology",
+      "dateCreated": "2025"
+    },
+    "knowsAbout": [
+      "Flask", "Node.js", "React", "Python", "Machine Learning",
+      "IoT", "Arduino", "ESP32", "AI Chatbots", "Gemini API",
+      "OpenAI", "Computer Vision", "Data Science", "REST APIs",
+      "MongoDB", "HTML", "CSS", "JavaScript", "Cloud Deployment",
+      "Vercel", "Render", "PythonAnywhere"
+    ],
+    "knowsLanguage": ["English", "Tamil"],
+    "nationality": "Indian",
     "sameAs": [
       "https://github.com/manojh17",
       "https://www.linkedin.com/in/manojh17/"
@@ -67,28 +114,116 @@
       "@type": "PostalAddress",
       "addressRegion": "Tamil Nadu",
       "addressCountry": "IN"
+    },
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Freelance / Open to Opportunities"
     }
   }
   </script>
 
-  <!-- ═══ WebSite Schema (enables Google Sitelinks Search) ═══ -->
+  <!-- ═══ JSON-LD: WebSite Schema (enables Google Sitelinks Searchbox) ═══ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": "https://manojh.online/#website",
     "name": "Manojh R Portfolio",
+    "alternateName": ["Manojh R", "manojh.online"],
     "url": "https://manojh.online",
-    "description": "Portfolio of Manojh R – Full-Stack Developer and AI/ML Engineer",
+    "description": "Official portfolio of Manojh R – Full-Stack Developer and AI/ML Engineer from Tamil Nadu, India.",
+    "inLanguage": "en-IN",
     "author": {
       "@type": "Person",
+      "@id": "https://manojh.online/#person",
       "name": "Manojh R"
+    },
+    "copyrightYear": 2025,
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://manojh.online/projects?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
     }
   }
   </script>
 
-  <!-- ═══ Performance ═══ -->
+  <!-- ═══ JSON-LD: BreadcrumbList ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://manojh.online/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══ JSON-LD: FAQPage (Google FAQ Rich Result) ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does Manojh R specialize in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Manojh R specializes in Full-Stack Web Development (Flask, Node.js, React), AI/ML integration (Gemini API, OpenAI, Machine Learning), and IoT (Arduino, ESP32). He is a B.Tech IT graduate from Tamil Nadu, India."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Manojh R available for freelance work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Manojh R is available for freelance and full-time opportunities in web development, AI/ML engineering, and IoT projects. You can contact him at manojh1702@gmail.com or via WhatsApp."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What projects has Manojh R built?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Manojh R has built AgriGPT (a multilingual agriculture chatbot using Flask and Gemini API), a Trust User Recommendation System using Machine Learning, an EMI Calculator with React, the GTEC IT Department website, and an Engineering Notes Telegram Bot serving 1500+ study materials."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What technologies does Manojh R know?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Manojh R is proficient in Python, JavaScript, Flask, Node.js, Express, React, HTML, CSS, MongoDB, REST APIs, Machine Learning (scikit-learn, pandas, numpy), Computer Vision, IoT (Arduino, ESP32), and cloud deployment on Render, Vercel, and PythonAnywhere."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I contact Manojh R?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can reach Manojh R via email at manojh1702@gmail.com, WhatsApp at +91-9597562259, LinkedIn at linkedin.com/in/manojh17, or GitHub at github.com/manojh17."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══ Performance: Resource Hints ═══ -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="preload" href="{{ url_for('static', filename='styles.css') }}" as="style" />
+  <link rel="preload" href="{{ url_for('static', filename='script.js') }}" as="script" />
+  <link rel="preload" href="{{ url_for('static', filename='assets/dp.JPG') }}" as="image" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
@@ -140,7 +275,12 @@
         <div class="avatar" style="margin-top:-75PX;">
           <div class="avatar" id="avatar">
             <div class="ring"></div>
-            <img src="{{ url_for('static', filename='assets/dp.JPG') }}" alt="Avatar"
+            <img src="{{ url_for('static', filename='assets/dp.JPG') }}"
+              alt="Manojh R – Full-Stack Web Developer and AI/ML Engineer from Tamil Nadu, India"
+              title="Manojh R – Full-Stack Developer & AI/ML Engineer"
+              width="200" height="200"
+              loading="eager"
+              fetchpriority="high"
               style="border-radius: 50%; object-fit: cover; width: 200px; height: 200px; border: 5px solid white; cursor:pointer;"
               onclick="window.location='/admin/'" />
           </div>
@@ -223,14 +363,25 @@
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
     <div class="container footer-inner">
-      <p>© Manojh R <span id="year"></span></p>
+      <nav aria-label="Footer navigation">
+        <ul style="list-style:none;display:flex;gap:1rem;flex-wrap:wrap;padding:0;margin:0 0 0.5rem;justify-content:center;">
+          <li><a href="/#about" rel="nofollow">About</a></li>
+          <li><a href="/#skills" rel="nofollow">Skills</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/#experience" rel="nofollow">Experience</a></li>
+          <li><a href="/#contact" rel="nofollow">Contact</a></li>
+          <li><a href="https://github.com/manojh17" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/manojh17/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        </ul>
+      </nav>
+      <p>© Manojh R <span id="year"></span> · <a href="https://manojh.online" rel="home">manojh.online</a></p>
       <a class="to-top" href="#home" aria-label="Back to top">↑</a>
     </div>
   </footer>
 
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </body>
 
 </html>

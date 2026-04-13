@@ -1,8 +1,24 @@
 User-agent: *
 Allow: /
 Allow: /projects
+Allow: /static/
 Disallow: /admin/
 Disallow: /api/
 Disallow: /static/admin/
+Crawl-delay: 10
+
+# Google
+User-agent: Googlebot
+Allow: /
+Allow: /projects
+Disallow: /admin/
+Disallow: /api/
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Allow: /projects
+Disallow: /admin/
+Disallow: /api/
 
 Sitemap: https://manojh.online/sitemap.xml

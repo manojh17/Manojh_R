@@ -147,8 +147,15 @@ def add_seo_headers(response):
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['X-Frame-Options'] = 'SAMEORIGIN'
     response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    response.headers['Permissions-Policy'] = 'geolocation=(), microphone=(), camera=()'
     if request.path.startswith('/static/'):
         response.headers['Cache-Control'] = 'public, max-age=31536000, immutable'
+    elif request.path in ('/', '/projects'):
+        # HTML pages: allow caching for a short time, always revalidate
+        response.headers['Cache-Control'] = 'public, max-age=3600, must-revalidate'
+        response.headers['X-Robots-Tag'] = 'index, follow'
+    elif request.path in ('/robots.txt', '/sitemap.xml'):
+        response.headers['X-Robots-Tag'] = 'noindex'
     return response
 
 
@@ -168,14 +175,26 @@ def sitemap():
         {'url': f'{SITE_URL}/projects', 'priority': '0.9', 'changefreq': 'weekly'},
     ]
     xml_parts = ['<?xml version="1.0" encoding="UTF-8"?>']
-    xml_parts.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
-    for page in static_pages:
+    xml_parts.append(
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"'
+        ' xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"'
+        ' xmlns:xhtml="http://www.w3.org/1999/xhtml">'
+    )
+    for i, page in enumerate(static_pages):
+        img_block = ''
+        if i == 0:  # Homepage: include profile image for Google Images
+            img_block = f'''
+    <image:image>
+      <image:loc>{SITE_URL}/static/assets/dp.JPG</image:loc>
+      <image:title>Manojh R – Full-Stack Developer &amp; AI/ML Engineer</image:title>
+      <image:caption>Portfolio photo of Manojh R, Full-Stack Web Developer and AI/ML Engineer from Tamil Nadu, India</image:caption>
+    </image:image>'''
         xml_parts.append(f'''
   <url>
     <loc>{page["url"]}</loc>
     <lastmod>{now}</lastmod>
     <changefreq>{page["changefreq"]}</changefreq>
-    <priority>{page["priority"]}</priority>
+    <priority>{page["priority"]}</priority>{img_block}
   </url>''')
     xml_parts.append('\n</urlset>')
     response = make_response(''.join(xml_parts))

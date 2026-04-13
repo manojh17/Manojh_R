@@ -1,12 +1,18 @@
 {
-  "name": "Manojh R – Portfolio",
-  "short_name": "ManojhR",
-  "description": "Full-Stack Developer & AI/ML Engineer Portfolio",
+  "name": "Manojh R – Full-Stack Developer & AI/ML Engineer",
+  "short_name": "Manojh R",
+  "description": "Portfolio of Manojh R – Full-Stack Web Developer and AI/ML Engineer from Tamil Nadu, India. Projects include AgriGPT, Machine Learning systems, React apps, and IoT builds.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#0f172a",
   "theme_color": "#0f172a",
   "lang": "en-IN",
+  "categories": ["developer tools", "portfolio", "technology", "productivity"],
+  "dir": "ltr",
+  "iarc_rating_id": "",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/static/assets/dp.JPG",
@@ -19,6 +25,22 @@
       "sizes": "512x512",
       "type": "image/jpeg",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "View Projects",
+      "short_name": "Projects",
+      "description": "Browse all projects by Manojh R",
+      "url": "/projects",
+      "icons": [{ "src": "/static/assets/dp.JPG", "sizes": "96x96" }]
+    },
+    {
+      "name": "Contact Manojh",
+      "short_name": "Contact",
+      "description": "Get in touch with Manojh R",
+      "url": "/#contact",
+      "icons": [{ "src": "/static/assets/dp.JPG", "sizes": "96x96" }]
     }
   ]
 }

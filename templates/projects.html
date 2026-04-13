@@ -1,49 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- ═══ Primary SEO ═══ -->
-  <title>Projects | Manojh R – Full-Stack & AI/ML Developer</title>
-  <meta name="description" content="Browse all projects by Manojh R: AgriGPT chatbot, Trust Prediction ML system, EMI Calculator, GTEC IT department site, and more. Flask, React, Python & IoT builds." />
-  <meta name="keywords" content="Manojh R projects, AgriGPT, Trust Prediction, EMI Calculator, Flask projects, Python ML projects, IoT projects, Full-Stack portfolio" />
+  <title>Projects | Manojh R – Full-Stack Developer &amp; AI/ML Engineer | manojh.online</title>
+  <meta name="description" content="Explore all projects by Manojh R: AgriGPT (multilingual agriculture chatbot, Flask + Gemini API), Trust User Recommendation System (ML), EMI Calculator (React), GTEC IT Department Website, Engineering Notes Telegram Bot. Built with Python, Flask, Node.js, React, Machine Learning, and IoT." />
+  <meta name="keywords" content="Manojh R projects, AgriGPT agriculture chatbot, multilingual chatbot Flask Gemini API, Tamil English voice chatbot, Trust Prediction ML system, trust recommendation machine learning, EMI Calculator React amortization, GTEC IT department website, Engineering Notes Telegram Bot, Anna University study materials, Full-Stack projects India, Python ML project, IoT project Arduino ESP32, Flask REST API project, React frontend project, Node.js backend project, web developer portfolio projects, AI ML projects 2025, B.Tech IT final year project, manojh.online, Manojh R developer, software engineer projects Tamil Nadu" />
   <meta name="author" content="Manojh R" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="revisit-after" content="7 days" />
+  <meta name="rating" content="general" />
+  <meta name="language" content="English" />
   <link rel="canonical" href="https://manojh.online/projects" />
 
   <!-- ═══ Open Graph ═══ -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://manojh.online/projects" />
-  <meta property="og:title" content="Projects | Manojh R – Full-Stack & AI/ML Developer" />
-  <meta property="og:description" content="Browse all projects by Manojh R: AgriGPT chatbot, Trust Prediction ML system, EMI Calculator and more." />
+  <meta property="og:title" content="Projects by Manojh R – Full-Stack &amp; AI/ML Developer | manojh.online" />
+  <meta property="og:description" content="Browse all projects by Manojh R: AgriGPT chatbot (Flask + Gemini), Trust Prediction ML system, EMI Calculator (React), GTEC IT site, Engineering Notes Telegram Bot. Flask, Node.js, React, Python &amp; IoT builds." />
   <meta property="og:image" content="https://manojh.online/static/assets/dp.JPG" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="800" />
+  <meta property="og:image:alt" content="Manojh R – Full-Stack Developer and AI/ML Engineer, Tamil Nadu India" />
+  <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:site_name" content="Manojh R Portfolio" />
+  <meta property="og:locale" content="en_IN" />
+  <meta property="og:locale:alternate" content="en_US" />
 
   <!-- ═══ Twitter Card ═══ -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Projects | Manojh R – Full-Stack & AI/ML Developer" />
-  <meta name="twitter:description" content="Browse all projects by Manojh R: AgriGPT, trust ML, EMI Calculator and more." />
+  <meta name="twitter:site" content="@manojh17" />
+  <meta name="twitter:creator" content="@manojh17" />
+  <meta name="twitter:url" content="https://manojh.online/projects" />
+  <meta name="twitter:title" content="Projects by Manojh R – Full-Stack &amp; AI/ML Developer" />
+  <meta name="twitter:description" content="AgriGPT chatbot, Trust Prediction ML, EMI Calculator React, GTEC Website, Engineering Notes Bot – built by Manojh R, Full-Stack Developer from Tamil Nadu." />
   <meta name="twitter:image" content="https://manojh.online/static/assets/dp.JPG" />
+  <meta name="twitter:image:alt" content="Manojh R – Full-Stack Developer and AI/ML Engineer" />
 
   <!-- ═══ PWA / App Meta ═══ -->
   <meta name="theme-color" content="#0f172a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Manojh R" />
+  <meta name="application-name" content="Manojh R Portfolio" />
   <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}" />
   <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='assets/dp.JPG') }}" />
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='assets/dp.JPG') }}" />
 
+  <!-- ═══ JSON-LD: BreadcrumbList ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://manojh.online/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": "https://manojh.online/projects"
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══ JSON-LD: ItemList of Projects (Rich Results) ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Projects by Manojh R",
+    "description": "A collection of web, AI/ML, and IoT projects built by Manojh R – Full-Stack Developer from Tamil Nadu, India.",
+    "url": "https://manojh.online/projects",
+    "numberOfItems": 5,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "AgriGPT – Agriculture Chatbot",
+          "description": "Multilingual (Tamil/English) voice & text chatbot for agriculture using Flask and Gemini API with local-first fallback, user profiles, and admin dashboard.",
+          "applicationCategory": "AI Chatbot",
+          "operatingSystem": "Web",
+          "author": { "@type": "Person", "name": "Manojh R", "url": "https://manojh.online" },
+          "keywords": "agriculture chatbot, multilingual chatbot, Flask, Gemini API, Tamil English, voice chatbot, AgriGPT"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Trust User Recommendation System",
+          "description": "Machine Learning pipeline for trust prediction among users, with Flask API and interactive UI for insights and recommendations.",
+          "applicationCategory": "Machine Learning",
+          "operatingSystem": "Web",
+          "url": "https://trust-prediction-among-users-on.onrender.com",
+          "author": { "@type": "Person", "name": "Manojh R", "url": "https://manojh.online" },
+          "keywords": "trust prediction, machine learning, recommendation system, Flask API"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "WebSite",
+          "name": "GTEC IT Department Website",
+          "description": "A professional, responsive website for the Information Technology department at GTEC with faculty profiles, labs, events, achievements, and contact details.",
+          "author": { "@type": "Person", "name": "Manojh R", "url": "https://manojh.online" },
+          "keywords": "GTEC, IT department website, college website, responsive design"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "EMI Calculator (React)",
+          "description": "Clean UX EMI calculator with charts and downloadable amortization reports, built with React.",
+          "applicationCategory": "Finance",
+          "operatingSystem": "Web",
+          "url": "https://emi-calci.vercel.app/",
+          "author": { "@type": "Person", "name": "Manojh R", "url": "https://manojh.online" },
+          "keywords": "EMI calculator, React, amortization, loan calculator, finance app"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": "Engineering Notes Bot",
+          "description": "Telegram bot giving students instant access to 1500+ categorized Anna University study materials by subject name or code.",
+          "applicationCategory": "Education",
+          "operatingSystem": "Telegram",
+          "url": "https://t.me/anna_university_notesbot",
+          "author": { "@type": "Person", "name": "Manojh R", "url": "https://manojh.online" },
+          "keywords": "Anna University notes, study materials, Telegram bot, engineering notes, students"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══ Performance: Resource Hints ═══ -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="preload" href="{{ url_for('static', filename='styles.css') }}" as="style" />
+  <link rel="preload" href="{{ url_for('static', filename='script.js') }}" as="script" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 
 <body>
+  <!-- Skip link for accessibility -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="site-header">
-    <nav class="nav">
+    <nav class="nav" aria-label="Primary">
       <a class="brand" href="/">MR.</a>
       <ul class="menu">
         <li><a href="/#about">About</a></li>
-        <li><a href="/projects" class="active">Projects</a></li>
+        <li><a href="/projects" class="active" aria-current="page">Projects</a></li>
         <li><a href="/#skills">Skills</a></li>
         <li><a href="/#experience">Experience</a></li>
         <li><a href="/#contact">Contact</a></li>
@@ -52,23 +180,36 @@
   </header>
 
   <main id="main">
-    <section class="section container">
+    <section class="section container" aria-label="Projects portfolio">
+      <!-- h1 on projects page for proper heading hierarchy -->
       <h1 class="section-title">Projects by Manojh R</h1>
-      <p class="muted">Major web, AI/ML, and IoT works I've built &amp; deployed.</p>
+      <p class="muted">Major web, AI/ML, and IoT works I've built &amp; deployed — from multilingual chatbots to machine learning systems and React apps.</p>
 
-      <div class="grid projects-grid" id="projects-container">
+      <div class="grid projects-grid" id="projects-container" aria-live="polite">
         <!-- Projects will be loaded dynamically here -->
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
     <div class="container footer-inner">
-      <p>© Manojh R <span id="year"></span></p>
+      <nav aria-label="Footer navigation">
+        <ul style="list-style:none;display:flex;gap:1rem;flex-wrap:wrap;padding:0;margin:0 0 0.5rem;justify-content:center;">
+          <li><a href="/" rel="home">Home</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/projects" aria-current="page">Projects</a></li>
+          <li><a href="/#skills">Skills</a></li>
+          <li><a href="/#experience">Experience</a></li>
+          <li><a href="/#contact">Contact</a></li>
+          <li><a href="https://github.com/manojh17" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/manojh17/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        </ul>
+      </nav>
+      <p>© Manojh R <span id="year"></span> · <a href="https://manojh.online" rel="home">manojh.online</a></p>
       <a class="to-top" href="#main" aria-label="Back to top">↑</a>
     </div>
   </footer>
 
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </body>
 </html>
