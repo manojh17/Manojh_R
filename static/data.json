@@ -1,19 +1,4 @@
 {
-    "profile": {
-        "name": "Manojh R",
-        "tagline": "Full‑Stack • AI/ML • IoT",
-        "bio": "I build modern, responsive web applications that blend clean UI, robust backends, and smart AI features. I’m a B.Tech (IT) graduate (May 2025) with hands‑on projects in Flask/Node, React, Python, and IoT using Arduino & ESP32.",
-        "aboutText1": "I’m a passionate <strong>Full‑Stack Web Developer</strong> and <strong>AI/ML integrator</strong> who loves shipping end‑to‑end products—frontend to backend to deployment. I’ve explored <strong>IoT</strong> with Arduino and ESP32, built <strong>AI chatbots</strong>, and designed <strong>responsive, scalable</strong> web apps.",
-        "aboutText2": "My interests span <strong>Flask & Node/Express</strong>, <strong>React</strong>, <strong>Python</strong>, <strong>computer vision</strong>, and <strong>cloud deployments</strong> (Render/Vercel/PythonAnywhere). Outside of code, I run a YouTube channel (<em>AnimeXGaming</em>) for anime & gaming.",
-        "degree": "Degree: <b>B.Tech – Information Technology</b> (May 2025)",
-        "focus": "Focus: <b>AgriGPT</b> (multilingual, voice-enabled), <b>IoT pest detection</b>, <b>e‑commerce</b>, <b>EMI tools</b>",
-        "strengths": "Strengths: Clean UI, problem‑solving, quick learning, clear communication",
-        "github": "https://github.com/manojh17",
-        "linkedin": "https://www.linkedin.com/in/manojh17/",
-        "email": "manojh1702@gmail.com",
-        "whatsapp": "919597562259",
-        "resume": "./assets/Manojh-R.pdf"
-    },
     "projects": [
         {
             "_id": "p1",
@@ -46,113 +31,68 @@
             "image": "./assets/p4.png",
             "liveLink": "https://emi-calci.vercel.app/",
             "sourceLink": "#"
-        },
-        {
-            "title": "Engineering Notes Bot",
-            "description": "The Engineering Notes Bot is a Telegram-based tool designed to help students quickly access over 1500 categorized study materials by entering a subject name or code (e.g., CY3151, EVS, Maths). It also fosters collaboration through a community group where students can share knowledge, discuss doubts, and support each other. The project is non-commercial and uses openly available educational resources.",
-            "image": "https://www.google.com/imgres?q=engineering%20notes%20images%20logo&imgurl=https%3A%2F%2Fimg.freepik.com%2Fpremium-vector%2Fengineering-simple-logo-gear-logo_393879-1426.jpg%3Fsemt%3Dais_incoming%26w%3D740%26q%3D80&imgrefurl=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fengineering-logo-png&docid=iH5DCRfY7LMxHM&tbnid=wcDfJwKD80LuJM&vet=12ahUKEwiGyIuN9s6TAxUTzDgGHVw4FqQQnPAOegQIJhAB..i&w=740&h=740&hcb=2&ved=2ahUKEwiGyIuN9s6TAxUTzDgGHVw4FqQQnPAOegQIJhAB",
-            "liveLink": "https://t.me/anna_university_notesbot",
-            "sourceLink": "",
-            "tags": [],
-            "_id": "p5",
-            "createdAt": "2026-04-02T17:57:30.577961",
-            "updatedAt": "2026-04-02T17:57:30.579091"
         }
     ],
     "skills": [
         {
-            "category": " Programing Languages",
-            "tags": [
-                "C",
-                "Python",
-                "Java (Foundational)",
-                "JavaScript (Foundational)"
-            ],
             "_id": "s1",
-            "createdAt": "2026-04-02T17:33:14.484766",
-            "updatedAt": "2026-04-02T17:33:14.484766"
+            "category": "Languages",
+            "tags": [
+                "Python",
+                "JavaScript",
+                "HTML",
+                "CSS"
+            ]
         },
         {
+            "_id": "s2",
             "category": "Frontend",
             "tags": [
-                "HTML",
-                "CSS",
-                "Js"
-            ],
-            "_id": "s2",
-            "createdAt": "2026-04-02T17:33:42.636600",
-            "updatedAt": "2026-04-02T17:33:42.636600"
+                "React",
+                "Responsive UI",
+                "Charts",
+                "Accessibility"
+            ]
         },
         {
+            "_id": "s3",
             "category": "Backend",
             "tags": [
                 "Flask",
                 "Node & Express",
                 "REST APIs",
                 "Auth"
-            ],
-            "_id": "s3",
-            "createdAt": "2026-04-02T17:33:51.314850",
-            "updatedAt": "2026-04-02T17:33:51.314850"
+            ]
         },
         {
-            "category": "Ai Tools",
+            "_id": "s4",
+            "category": "AI/ML & Data",
             "tags": [
                 "GenAI (Gemini)",
                 "OpenAI APIs",
-                "Ollama",
-                "Antigravity",
-                "Claude"
-            ],
-            "_id": "s4",
-            "createdAt": "2026-04-02T17:34:38.308739",
-            "updatedAt": "2026-04-02T17:34:38.308739"
+                "Computer Vision",
+                "Scikit-learn"
+            ]
         },
         {
-            "category": "Tools",
-            "tags": [
-                "Git & GitHub",
-                "Render",
-                "Vercel"
-            ],
-            "_id": "s6",
-            "createdAt": "2026-04-02T17:35:10.695858",
-            "updatedAt": "2026-04-02T17:35:10.695858"
-        },
-        {
-            "category": "IoT Basics",
+            "_id": "s5",
+            "category": "IoT",
             "tags": [
                 "ESP32-CAM",
                 "Arduino",
                 "Serial/Cloud bridges",
                 "Automation"
-            ],
-            "_id": "807644ae-5149-4a37-b5c1-d117387b09f3",
-            "createdAt": "2026-04-02T17:36:03.673493"
+            ]
         },
         {
-            "category": "Data Science",
+            "_id": "s6",
+            "category": "Tools",
             "tags": [
-                "Basic Statastics",
-                "Data Analyzation",
-                "Data Preprocessing",
-                "Feature Engineering",
-                "Model Selection",
-                "Machine Learning"
-            ],
-            "_id": "89a0454e-6704-4846-b458-cfd2a24a49bb",
-            "createdAt": "2026-04-02T17:38:16.047342"
-        },
-        {
-            "category": "Data Handling Tools",
-            "tags": [
-                "Numpy",
-                "Pandas",
-                "Matplotlib",
-                "Seaborn"
-            ],
-            "_id": "58a70c50-c04c-49d9-b2a2-e3993a0db670",
-            "createdAt": "2026-04-02T17:39:18.530559"
+                "Git & GitHub",
+                "Render",
+                "Vercel",
+                "PythonAnywhere"
+            ]
         }
     ],
     "experiences": [
@@ -164,6 +104,9 @@
             "description": "Started My first step on career on Web development @joy innovations , Where i learned About webdevelopmnt and some Industrial stuffs."
         }
     ],
-    "certificates": [],
-    "messages": []
+    "messages": [],
+    "admin": {
+        "username": "admin",
+        "password": "scrypt:32768:8:1$vop5LiMOYF4hy9RY$af55d1c50a33effadf9b71cd2a688f3d589375b94a0afc9ff9b86e41228ce32f55c67ac651206f8aa851ce663a36eaae81247388b8c4dc926d779512b63643bc"
+    }
 }
