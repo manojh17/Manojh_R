@@ -257,6 +257,28 @@ def submit_contact():
 
 
 # ─────────────────────────────────────────
+# EMERGENCY RESET (one-time use, remove after use)
+# ─────────────────────────────────────────
+@app.route('/api/admin/emergency-reset', methods=['GET'])
+def emergency_reset():
+    """
+    Force-resets admin credentials in MongoDB to plain-text.
+    Visit: /api/admin/emergency-reset?token=RESET_manojh@17
+    REMOVE THIS ROUTE after successfully logging in.
+    """
+    secret = request.args.get('token', '')
+    if secret != 'RESET_manojh@17':
+        return jsonify({'message': 'Forbidden'}), 403
+
+    col_admin.update_one(
+        {'singleton': True},
+        {'$set': {'username': 'admin', 'password': 'manojh@17', 'singleton': True}},
+        upsert=True
+    )
+    return jsonify({'message': '✅ Admin credentials reset. username=admin, password=manojh@17. Now log in, then DELETE this route from app.py!'})
+
+
+# ─────────────────────────────────────────
 # ADMIN AUTH
 # ─────────────────────────────────────────
 @app.route('/api/admin/login', methods=['POST'])
