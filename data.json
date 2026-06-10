@@ -165,5 +165,9 @@
         }
     ],
     "certificates": [],
-    "messages": []
+    "messages": [],
+    "admin_credentials": {
+        "username": "admin",
+        "password": "manojh@17"
+    }
 }
