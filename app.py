@@ -3,6 +3,7 @@ import json
 import uuid
 from datetime import datetime, timezone
 from functools import wraps
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from flask import Flask, request, jsonify, render_template, redirect, url_for, send_from_directory, Response, make_response
 from flask_cors import CORS
@@ -105,10 +106,14 @@ def _seed_from_json():
     # Admin credentials
     if col_admin.count_documents({}) == 0:
         stored = data.get('admin_credentials', {})
+        raw_pass = stored.get('password', os.getenv('ADMIN_PASSWORD', 'admin'))
+        # Hash the password if it isn't already hashed
+        if not raw_pass.startswith('scrypt:') and not raw_pass.startswith('pbkdf2:'):
+            raw_pass = generate_password_hash(raw_pass)
         col_admin.insert_one({
             'singleton': True,
             'username': stored.get('username', os.getenv('ADMIN_USERNAME', 'admin')),
-            'password': stored.get('password', os.getenv('ADMIN_PASSWORD', 'admin')),
+            'password': raw_pass,
         })
         print("   ✅  admin_credentials seeded")
         seeded = True
@@ -262,7 +267,7 @@ def submit_contact():
 @app.route('/api/admin/emergency-reset', methods=['GET'])
 def emergency_reset():
     """
-    Force-resets admin credentials in MongoDB to plain-text.
+    Force-resets admin credentials in MongoDB (stores a fresh hash).
     Visit: /api/admin/emergency-reset?token=RESET_manojh@17
     REMOVE THIS ROUTE after successfully logging in.
     """
@@ -270,12 +275,13 @@ def emergency_reset():
     if secret != 'RESET_manojh@17':
         return jsonify({'message': 'Forbidden'}), 403
 
+    hashed = generate_password_hash('manojh@17')
     col_admin.update_one(
-        {'singleton': True},
-        {'$set': {'username': 'admin', 'password': 'manojh@17', 'singleton': True}},
+        {},  # match ANY document (catches docs without singleton field too)
+        {'$set': {'username': 'admin', 'password': hashed, 'singleton': True}},
         upsert=True
     )
-    return jsonify({'message': '✅ Admin credentials reset. username=admin, password=manojh@17. Now log in, then DELETE this route from app.py!'})
+    return jsonify({'message': '✅ Admin credentials reset. username=admin, password=manojh@17. Now log in, then DELETE this route!'})
 
 
 # ─────────────────────────────────────────
@@ -284,14 +290,23 @@ def emergency_reset():
 @app.route('/api/admin/login', methods=['POST'])
 def admin_login():
     req_data = request.json
-    username = req_data.get('username')
-    password = req_data.get('password')
+    username = req_data.get('username', '')
+    password = req_data.get('password', '')
 
-    creds = col_admin.find_one({'singleton': True})
-    valid_user = creds.get('username', os.getenv('ADMIN_USERNAME', 'admin')) if creds else os.getenv('ADMIN_USERNAME', 'admin')
-    valid_pass = creds.get('password', os.getenv('ADMIN_PASSWORD', 'admin')) if creds else os.getenv('ADMIN_PASSWORD', 'admin')
+    creds = col_admin.find_one({})  # get any admin doc
+    if not creds:
+        return jsonify({'message': 'Invalid Credentials'}), 400
 
-    if username == valid_user and password == valid_pass:
+    valid_user = creds.get('username', 'admin')
+    valid_pass = creds.get('password', '')
+
+    # Support both hashed passwords and legacy plain-text passwords
+    if valid_pass.startswith('scrypt:') or valid_pass.startswith('pbkdf2:'):
+        password_ok = check_password_hash(valid_pass, password)
+    else:
+        password_ok = (password == valid_pass)
+
+    if username == valid_user and password_ok:
         token = jwt.encode({'user': username}, app.config['SECRET_KEY'], algorithm="HS256")
         return jsonify({'token': token})
     return jsonify({'message': 'Invalid Credentials'}), 400
@@ -307,8 +322,8 @@ def change_password():
         return jsonify({'message': 'Username and password required'}), 400
 
     col_admin.update_one(
-        {'singleton': True},
-        {'$set': {'username': new_username, 'password': new_password}},
+        {},  # match any admin doc
+        {'$set': {'username': new_username, 'password': generate_password_hash(new_password), 'singleton': True}},
         upsert=True
     )
     return jsonify({'message': 'Credentials updated successfully'})
